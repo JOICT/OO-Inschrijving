@@ -1,0 +1,189 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+
+            <div class="row">
+                <div class="col-md-12">
+                     <div class="headline"><h2>Kalender</h2></div>
+                    <div class="row"> 
+                    <div class="col-md-12">
+                        @(Html.Kendo().Scheduler<OO_Inschrijving.Models.TrainingViewModel>()
+                              .Name("scheduler")
+                              .Date(DateTime.Now)
+                              
+                                .StartTime(DateTime.Now)
+                                .Height(700)
+                                .Editable(e => e.TemplateId("SubscripeTemplate")) 
+                                .Views(views =>
+                                {
+                                    views.DayView();
+                                    views.WorkWeekView(workWeekView => workWeekView.Selected(true)).ShowWorkHours();
+                                    views.WeekView(weekView => weekView.Selected(false));
+                                    views.MonthView();
+                                    views.AgendaView();
+                                 
+                                })
+                                .Timezone("Etc/UTC")
+
+                                .DataSource(d => d
+                                    .Model(m => {
+                                        m.Id(f => f.ID);
+                                        m.Field(f => f.Title).DefaultValue("No title");
+                                        m.Field(f => f.Title).DefaultValue("No title");
+                        
+                                    })
+                                    .Read("Read", "Home")
+           
+
+                                )
+                        )
+                         </div>
+                       </div>
+                        <div class="row margin-top-20">
+               
+                         <div class="col-md-12">
+                    
+                            <div class="headline"><h2>Zoek je training</h2></div>
+                   
+                            <div id="filters" class="button-group">
+
+                                <p><input type="text" id="quicksearch" placeholder="Zoek" /></p>
+                                <button class="btn-u" data-filter=".Efficient">Efficient</button>
+                                <button class="btn-u" data-filter=".Klantbeleving">Klantbeleving</button>
+                                <button class="btn-u" data-filter="*">Alle tonen</button>
+
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-9"> 
+                                <div class="isotope">
+
+                                    <div class="element-item Efficient col-md-4">
+                                        <div class="service-block rounded-2x service-block-light-efficient">
+
+                                            <h2 class="heading-md">Gesprekstechniek</h2>
+                                            <h3 class="heading-md">Efficient werken</h3>
+                                            <p>Korte omschrijving training</p>
+                                            <i>  27-3-2015 </i>
+                                        </div>
+                                    </div>
+                                    <div class="element-item Efficient col-md-4">
+                                        <div class="service-block rounded-2x service-block-light-efficient">
+
+                                            <h2 class="heading-md">Leiding nemen</h2>
+                                            <h3 class="heading-md">Efficient werken</h3>
+                                            <p>Korte omschrijving training</p>
+                                            <i>  27-3-2015 </i>
+                                        </div>
+                                    </div>
+
+                                    <div class="element-item Klantbeleving col-md-4">
+                                        <div class="service-block rounded-2x service-block-light-klantbeleving">
+
+                                            <h2 class="heading-md">Hostmanship</h2>
+                                            <h3 class="heading-md">Klantbeleving</h3>
+                                            <p>Korte omschrijving training</p>
+                                            <i>  27-3-2015 </i>
+                                        </div>
+                                    </div>
+
+                                    <div class="element-item Klantbeleving col-md-4">
+                                        <div class="service-block rounded-2x service-block-light-klantbeleving">
+
+                                            <h2 class="heading-md">Customer Journey</h2>
+                                            <h3 class="heading-md">Klantbeleving</h3>
+                                            <p>Korte omschrijving training</p>
+                                            <i>  27-3-2015 </i>
+                                        </div>
+                                    </div>
+                                </div>
+            
+                            </div>
+                     </div>
+                    </div>
+                </div>
+            </div>
+
+<script id="SubscripeTemplate" type="text/x-kendo-template">
+  <div>Title: #: title #</div>
+
+</script>
+
+
+
+@*    <script id="SubscripeTemplate" type="text/x-kendo-template">   
+    Test
+</script>*@
+
+<script>
+
+
+    // set the min date to Jan 1st, 2011
+    $("#calendar").kendoCalendar({
+        min: new Date(2015, 0, 1)
+    });
+
+
+
+        $(function () {
+            // init Isotope
+
+            var qsRegex;
+            var $container = $('.isotope').isotope({
+                itemSelector: '.element-item',
+                layoutMode: 'fitRows'
+
+            });
+
+            function searchFilter() {
+                qsRegex = new RegExp($quicksearch.val(), 'gi');
+                $container.isotope({
+                    filter: function () {
+                        return qsRegex ? $(this).text().match(qsRegex) : true;
+                    }
+                });
+            }
+
+
+            var $quicksearch = $('#quicksearch').keyup(debounce(searchFilter));
+
+
+            // bind filter button click
+            $('#filters').on('click', 'button', function () {
+                var filterValue = $(this).attr('data-filter');
+
+                // use filterFn if matches value
+
+                $container.isotope({ filter: filterValue });
+            });
+            // change is-checked class on buttons
+            $('.button-group').each(function (i, buttonGroup) {
+                var $buttonGroup = $(buttonGroup);
+                $buttonGroup.on('click', 'button', function () {
+                    $buttonGroup.find('.is-checked').removeClass('is-checked');
+
+                    $(this).addClass('is-checked');
+                });
+            });
+
+        });
+
+        function debounce(fn, threshold) {
+            var timeout;
+            return function debounced() {
+                if (timeout) {
+                    clearTimeout(timeout);
+                }
+                function delayed() {
+                    fn();
+                    timeout = null;
+                }
+                timeout = setTimeout(delayed, threshold || 100);
+            }
+        }
+    </script>
+
+
+

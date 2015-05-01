@@ -1,0 +1,107 @@
+﻿@{
+    ViewBag.Title = "Admin";
+}
+
+
+            <div class="row">
+                <div class="col-md-12">
+                     <div class="headline"><h2>Kalender</h2></div>
+                    <div class="row"> 
+                    <div class="col-md-12">
+                        @(Html.Kendo().Scheduler<OO_Inschrijving.Models.TrainingViewModel>()
+                              .Name("scheduler")
+                              
+                              .Date(DateTime.Now)
+                                
+                                .Height(600)
+                                
+                                .Views(views =>
+                                {
+                                    views.DayView(view => view.Selected(true)
+                                       
+                                    .WorkDayStart(8, 0, 0)
+                                    .WorkDayEnd(17, 0, 0)
+                                    .SelectedDateFormat("{0:dddd d/M/yyyy}")
+                                    .Footer(false));
+                                    
+                                    views.WorkWeekView(workWeekView => workWeekView.Selected(true)).ShowWorkHours();
+                                    views.WeekView();
+                                    views.MonthView();
+                                    views.AgendaView();
+                                 
+                                })
+                                .Timezone("Etc/UTC")
+                                .Resources(resource => {
+                                     resource.Add(m => m.CategoryID)
+                                         .Title("Categorie")
+                                         .Name("Category")
+                                         .DataTextField("Text")
+                                         .DataValueField("Value")
+                                         .DataColorField("Color")
+                                         .BindTo(new[] { 
+                                                    new { Text = "Alex", Value = 1, Color = "#f8a398" },
+                                                    new { Text = "Bob", Value = 2, Color = "#51a0ed" },
+                                                    new { Text = "Charlie", Value = 3, Color = "#56ca85" } 
+                 
+                                        });
+                                 })
+                                .DataSource(d => d
+                                    .Model(m => {
+                                        m.Id(f => f.ID);
+                                        m.Field(f => f.Title).DefaultValue("No title");
+                                        m.Field(f => f.Title).DefaultValue("No title");
+                        
+                                    })
+                                     .Events(e => e.Error("error_handler"))
+                                    .Read("Read", "Admin")
+                                    .Create("Create", "Admin")
+                                    .Destroy("Destroy", "Admin")
+                                    .Update("Update", "Admin")
+
+                                )
+                        )
+                     </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+<script type="text/javascript">
+    function error_handler(e) {
+        if (e.errors) {
+            var message = "Errors:\n";
+            $.each(e.errors, function (key, value) {
+                if ('errors' in value) {
+                    $.each(value.errors, function () {
+                        message += this + "\n";
+                    });
+                }
+            });
+            alert(message);
+
+            var scheduler = $("#scheduler").data("kendoScheduler");
+            scheduler.one("dataBinding", function (e) {
+                //prevent saving if server error is thrown
+                e.preventDefault();
+            })
+        }
+    }
+
+    function scheduler_change(e) {
+        var start = e.start; //selection start date
+        var end = e.end; //selection end date
+        var slots = e.slots; //list of selected slots
+        var events = e.events; //list of selected Scheduler events
+
+        var message = "change:: selection from {0:g} till {1:g}";
+
+        if (events.length) {
+            message += ". The selected event is '" + events[events.length - 1].title + "'";
+        }
+
+        kendoConsole.log(kendo.format(message, start, end));
+    }
+
+</script>

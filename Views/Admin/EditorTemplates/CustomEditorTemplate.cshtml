@@ -1,0 +1,17 @@
+﻿@model OO_Inschrijving.Models.TrainingViewModel
+@{
+    //required in order to render validation attributes
+    ViewContext.FormContext = new FormContext();
+}
+
+<script id="customAllDayTemplate" type="text/x-kendo-template">
+  <div>Title: #: title #</div>
+  <div>Atendees:
+      # for (var i = 0; i < resources.length; i++) { #
+        #: resources[i].text #
+      # } #
+  </div>
+</script>
+@{
+    ViewContext.FormContext = null;
+}

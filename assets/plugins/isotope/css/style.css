@@ -1,0 +1,94 @@
+* {
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+body {
+  font-family: sans-serif;
+}
+
+/* ---- input ---- */
+
+input[type="text"] {
+  font-size: 20px;
+}
+
+/* ---- isotope ---- */
+
+.isotope {
+
+  width:100%;
+}
+
+/* clear fix */
+.isotope:after {
+  content: '';
+  
+  clear: both;
+}
+
+/* ---- .element-item ---- */
+.service-block-light-efficient
+{
+    padding:100px;
+    border:solid 1px #95DBEC;
+    background: #95DBEC;
+}
+.service-block-light-klantbeleving
+{
+    padding:100px;
+    border:solid 1px #b08d8d;
+    background: #b08d8d;
+}
+
+.element-item {
+  position: relative;
+  float: left;
+
+ width:25%;
+  margin: 5px;
+  padding: 10px;
+  color: #262524;
+}
+
+.element-item > * {
+  margin: 0;
+  padding: 0;
+}
+
+.element-item .category {
+  
+
+  left: 10px;
+  top: 60px;
+  text-transform: none;
+  letter-spacing: 0;
+  font-size: 12px;
+  font-weight: normal;
+}
+
+.element-item .name {
+ 
+  left: 10px;
+  top: 0px;
+  font-size: 42px;
+  font-weight: bold;
+  color: white;
+}
+
+.element-item .date {
+  
+  right: 8px;
+  top: 5px;
+}
+
+.element-item .available {
+ display:block;
+ background:red;
+}
+
+.element-item.efficient          { background: #C9C4FF;}
+.element-item.klantbeleving      { background: #C4F7FF; }
+.element-item.productkennis      { background: #C4FFDE; }
+.element-item.systeemgebruik     { background: #FFE5C4; }

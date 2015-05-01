@@ -1,0 +1,157 @@
+﻿<!DOCTYPE html>
+<html>
+    <head>
+
+        <meta charset="utf-8"> 
+        <title>@ViewBag.Title - My Telerik MVC Application</title>
+        <link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css" />
+    	<link href="@Url.Content("~/Content/kendo/2015.1.318/kendo.common-bootstrap.min.css")" rel="stylesheet" type="text/css" />
+	<link href="@Url.Content("~/Content/kendo/2015.1.318/kendo.mobile.all.min.css")" rel="stylesheet" type="text/css" />
+	<link href="@Url.Content("~/Content/kendo/2015.1.318/kendo.dataviz.min.css")" rel="stylesheet" type="text/css" />
+	<link href="@Url.Content("~/Content/kendo/2015.1.318/kendo.bootstrap.min.css")" rel="stylesheet" type="text/css" />
+	<link href="@Url.Content("~/Content/kendo/2015.1.318/kendo.dataviz.bootstrap.min.css")" rel="stylesheet" type="text/css" />
+	<script src="@Url.Content("~/Scripts/kendo/2015.1.318/jquery.min.js")"></script>
+	<script src="@Url.Content("~/Scripts/kendo/2015.1.318/jszip.min.js")"></script>
+	<script src="@Url.Content("~/Scripts/kendo/2015.1.318/kendo.all.min.js")"></script>
+	<script src="@Url.Content("~/Scripts/kendo/2015.1.318/kendo.aspnetmvc.min.js")"></script>
+	<script src="@Url.Content("~/Scripts/kendo.modernizr.custom.js")"></script>
+        @*<script src="http://cdn.kendostatic.com/2015.1.318/js/cultures/kendo.culture.nl-NL-min.js"></script>*@
+        <script src="@Url.Content("~/Scripts/kendo/2015.1.318/lang/kendo.nl-NL.js")"></script>
+        <script type="text/javascript">kendo.culture("nl-NL");</script>
+
+         <!-- Favicon -->
+    <link rel="shortcut icon" href="favicon.ico">
+
+
+
+    <!-- CSS Global Compulsory -->
+    <link rel="stylesheet" href="~/assets/plugins/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/assets/css/style.css">
+
+    <!-- CSS Implementing Plugins -->
+    <link rel="stylesheet" href="~/assets/plugins/line-icons/line-icons.css">
+
+    <link rel="stylesheet" href="~/assets/plugins/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="~/assets/plugins/isotope/css/style.css">
+    <link rel="stylesheet" href="~/assets/plugins/owl-carousel/owl-carousel/owl.carousel.css">    
+    <link rel="stylesheet" href="~/assets/plugins/sky-forms/version-2.0.1/css/custom-sky-forms.css">
+    <link rel="stylesheet" href="~/assets/plugins/cube-portfolio/cubeportfolio/css/cubeportfolio.css">
+
+    <!--[if lt IE 9]><link rel="stylesheet" href="css/sky-forms-ie8.css"><![endif]-->
+
+    <!-- CSS Page Style -->    
+    <link rel="stylesheet" href="~/assets/css/pages/page_search.css">
+
+    <!-- CSS Theme -->    
+    <link rel="stylesheet" href="~/assets/css/theme-colors/default.css">
+
+    <!-- CSS Customization -->
+    <link rel="stylesheet" href="~/assets/css/custom.css">
+
+
+</head>
+ <body>
+     <header>
+			<div id="title">
+				<h1>DELTA LOGO > Opleiding & Ontwikkeling - Trainingskalender</h1>
+			</div>
+
+			@(Html.Kendo().Menu()
+					.Name("menu")
+					.Items(menu => {
+						menu.Add().Text("Home").Action("Index", "Home");
+						menu.Add().Text("Mijn Inschrijvingen").Action("Subscriptions", "Home");
+					}))
+		</header>
+ @*<header>
+        <div class="content-wrapper">
+            <div class="float-left">
+                <p class="site-title">@Html.ActionLink("Delta Logo", "Index", "Home")</p>
+            </div>
+            <div class="float-right">
+                <nav>
+                    <ul id="menu">
+                        <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                        <li>@Html.ActionLink("Kalender", "About", "Home")</li>
+                        <li>@Html.ActionLink("Zoeken", "Contact", "Home")</li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>*@
+<div class="wrapper">
+    <!--=== Header ===-->    
+     
+    <!--=== End Header ===-->
+
+    <!--=== Search Block ===-->
+    <div class="search-block parallaxBg">
+        <div class="container">
+            <div class="col-md-6 col-md-offset-3">
+                <h1>Zoek <span class="color-blue">Jouw</span> Training</h1>
+
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Vul een naam of categorie in..">
+                    <span class="input-group-btn">
+                        
+                        <button class="btn-u btn-u-lg" type="button"><i class="fa fa-search"></i></button>
+                    </span>
+                </div>
+
+               
+            </div>
+        </div>    
+    </div><!--/container-->     
+    <!--=== End Search Block ===-->
+
+    <!--=== Content ===-->
+    <div class="container content">
+
+            @RenderSection("featured", required: false)
+          <!--  <section class="content-wrapper main-content clear-fix"> -->
+                @RenderBody()
+           <!-- </section> -->
+
+           
+    </div>
+    </div>
+
+        <footer>
+            <div class="content-wrapper">
+                <div class="float-left">
+                    <p>&copy; @DateTime.Now.Year - Opleiding & ontwikkeling</p>
+                </div>
+            </div>
+        </footer>
+
+        <!-- JS Global Compulsory -->           
+        
+        <script type="text/javascript" src="~/assets/plugins/jquery/jquery-migrate.min.js"></script>
+        <script type="text/javascript" src="~/assets/plugins/bootstrap/js/bootstrap.min.js"></script> 
+        <!-- JS Implementing Plugins -->
+        <script type="text/javascript" src="~/assets/plugins/back-to-top.js"></script>
+        <script type="text/javascript" src="~/assets/plugins/jquery.parallax.js"></script>
+        <script type="text/javascript" src="~/assets/plugins/counter/waypoints.min.js"></script>
+        <script type="text/javascript" src="~/assets/plugins/counter/jquery.counterup.min.js"></script>
+        <script type="text/javascript" src="~/assets/plugins/owl-carousel/owl-carousel/owl.carousel.js"></script>
+        <script type="text/javascript" src="~/assets/plugins/cube-portfolio/cubeportfolio/js/jquery.cubeportfolio.min.js"></script>
+        <script type="text/javascript" src="~/assets/plugins/isotope/js/isotope.pkgd.min.js"></script>
+        <script type="text/javascript" src="~/assets/plugins/isotope/js/main.js"></script>
+
+        <!-- JS Customization -->
+        <script type="text/javascript" src="~/assets/js/custom.js"></script>
+        <!-- JS Page Level -->           
+        <script type="text/javascript" src="~/assets/js/app.js"></script>
+        <script type="text/javascript" src="~/assets/js/plugins/owl-carousel.js"></script>
+            <script type="text/javascript" src="~/assets/js/plugins/cube-portfolio.js"></script>
+
+        <script type="text/javascript">
+            jQuery(document).ready(function () {
+                App.init();
+                App.initCounter();
+                App.initParallaxBg();
+                OwlCarousel.initOwlCarousel();
+            });
+        </script>
+    </body>
+</html>
